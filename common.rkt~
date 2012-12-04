@@ -1,0 +1,3 @@
+#lang racket
+
+;; common routines that I prefer
