@@ -39,4 +39,18 @@
   (for ((e (file->lines word-list-file)))
 	   (add e *BLOOM-FILTER*)))
 
+(define (dump-bloom-filter-vector)
+  (write-to-file (bloom-filter-v *BLOOM-FILTER*) "english-bloom-filter-vector" #:mode 'binary))
 
+(define (read-in-vector)
+  (read (open-input-file "english-bloom-filter-vector" #:mode 'binary)))
+
+(define (load-bloom-filter)
+  (set! *BLOOM-FILTER* (bloom-filter
+			*VOCAB-SIZE*
+			*WIDTH*
+			(compute-k *VOCAB-SIZE*)
+			hash
+			(read-in-vector))))
+
+	
